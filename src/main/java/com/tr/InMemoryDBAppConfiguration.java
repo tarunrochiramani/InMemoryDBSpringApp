@@ -59,15 +59,6 @@ public class InMemoryDBAppConfiguration {
         return sessionFactory;
     }
 
-    @Bean (destroyMethod = "stop")
-    public Server createLocalTCPServer() throws SQLException {
-        Server server = Server.createTcpServer("-tcp","-tcpAllowOthers","-tcpPort","8043");
-
-        server.start();
-        logger.info(server.getURL());
-        return server;
-    }
-
     @Bean
     public EntityManagerFactory entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
