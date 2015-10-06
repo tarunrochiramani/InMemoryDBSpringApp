@@ -13,4 +13,12 @@
         <!--</createTable>-->
     <!--</changeSet>-->
 
+    <changeSet id="1" author="Insert_Person">
+        <insert tableName="person">
+            <column name="firstName" value="Tarun" type="VARCHAR2"/>
+            <column name="lastName" value="Rochiramani" type="VARCHAR2" />
+        </insert>
+    </changeSet>
+
+
 </databaseChangeLog>
