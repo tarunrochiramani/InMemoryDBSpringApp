@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.tr.entity.Person;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Persons implements Serializable {
     private List<Person> persons;
 

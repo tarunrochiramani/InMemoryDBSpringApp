@@ -1,14 +1,12 @@
-package com.tr;
+package com.tr.spring;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.sql.SQLException;
 import java.util.Properties;
 
 import liquibase.integration.spring.SpringLiquibase;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.log4j.Logger;
-import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,13 +20,18 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @ComponentScan(basePackages = "com.tr.*")
 @PropertySource("classpath:/application.properties")
 @EnableJpaRepositories(basePackages = "com.tr.repository")
 @EnableTransactionManagement
-public class InMemoryDBAppConfiguration {
+@EnableWebMvc
+public class InMemoryDBAppConfiguration extends WebMvcConfigurerAdapter {
 
     private static Logger logger = Logger.getLogger(InMemoryDBAppConfiguration.class);
 
@@ -95,5 +98,11 @@ public class InMemoryDBAppConfiguration {
         return springLiquibase;
     }
 
-
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
+        internalResourceViewResolver.setPrefix("/WEB-INF/pages/");
+        internalResourceViewResolver.setSuffix(".jsp");
+        registry.viewResolver(internalResourceViewResolver);
+    }
 }

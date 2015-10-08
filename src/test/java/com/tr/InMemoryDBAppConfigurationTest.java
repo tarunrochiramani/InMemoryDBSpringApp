@@ -2,6 +2,7 @@ package com.tr;
 
 import javax.sql.DataSource;
 
+import com.tr.spring.InMemoryDBAppConfiguration;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;

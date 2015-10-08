@@ -20,3 +20,6 @@ test_db.mv.db
 test_db_auto.lock.db
 test_db_auto.mv.db
 test_db_auto.trace.db
+
+
+4. This is also a Spring MVC application set up with annotations.

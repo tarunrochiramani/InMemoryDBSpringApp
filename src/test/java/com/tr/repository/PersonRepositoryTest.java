@@ -1,6 +1,6 @@
 package com.tr.repository;
 
-import com.tr.InMemoryDBAppConfiguration;
+import com.tr.spring.InMemoryDBAppConfiguration;
 import com.tr.entity.Person;
 import org.junit.After;
 import org.junit.Before;
