@@ -19,12 +19,10 @@ import static org.junit.Assert.assertNotNull;
 public class InMemoryDBAppConfigurationTest {
 
     @Autowired private DataSource dataSource;
-    @Autowired private SessionFactory sessionFactory;
 
     @Test
     public void dataSourceExists() {
         assertNotNull(dataSource);
-        assertNotNull(sessionFactory);
     }
 
 }

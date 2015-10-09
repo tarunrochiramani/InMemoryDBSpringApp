@@ -2,7 +2,7 @@ package com.tr.spring;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class InMemoryWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class InMemoryRestInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[0];
@@ -10,16 +10,16 @@ public class InMemoryWebAppInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] {MyWebConfig.class};
+        return new Class[] {RestConfig.class};
     }
 
     @Override
     protected String[] getServletMappings() {
-        return new String[] { "/" };
+        return new String[] { "/rest" };
     }
 
     @Override
     protected String getServletName() {
-        return "mvcDispatcher";
+        return "restDispatcher";
     }
 }

@@ -14,24 +14,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @ComponentScan(basePackages = "com.tr.*")
 @PropertySource("classpath:/application.properties")
 @EnableJpaRepositories(basePackages = "com.tr.repository")
-@EnableTransactionManagement
-@EnableWebMvc
-public class InMemoryDBAppConfiguration extends WebMvcConfigurerAdapter {
+public class InMemoryDBAppConfiguration {
 
     private static Logger logger = Logger.getLogger(InMemoryDBAppConfiguration.class);
 
@@ -49,18 +41,18 @@ public class InMemoryDBAppConfiguration extends WebMvcConfigurerAdapter {
         return dataSource;
     }
 
-    @Bean (name = "sessionFactory")
-    public LocalSessionFactoryBean getSessionFactory() {
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(getDataSource());
-        sessionFactory.setPackagesToScan(new String[] { "com.tr.*" });
-
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.dialect", environment.getProperty("spring.datasource.dialect"));
-        sessionFactory.setHibernateProperties(properties);
-
-        return sessionFactory;
-    }
+//    @Bean (name = "sessionFactory")
+//    public LocalSessionFactoryBean getSessionFactory() {
+//        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+//        sessionFactory.setDataSource(getDataSource());
+//        sessionFactory.setPackagesToScan(new String[] { "com.tr.*" });
+//
+//        Properties properties = new Properties();
+//        properties.setProperty("hibernate.dialect", environment.getProperty("spring.datasource.dialect"));
+//        sessionFactory.setHibernateProperties(properties);
+//
+//        return sessionFactory;
+//    }
 
     @Bean
     public EntityManagerFactory entityManagerFactory() {
@@ -96,13 +88,5 @@ public class InMemoryDBAppConfiguration extends WebMvcConfigurerAdapter {
         springLiquibase.setChangeLog("classpath:/" + environment.getProperty("changelog.file"));
 
         return springLiquibase;
-    }
-
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
-        internalResourceViewResolver.setPrefix("/WEB-INF/pages/");
-        internalResourceViewResolver.setSuffix(".jsp");
-        registry.viewResolver(internalResourceViewResolver);
     }
 }
