@@ -23,3 +23,9 @@ test_db_auto.trace.db
 
 
 4. This is also a Spring MVC application set up with annotations.
+
+5. Enabled Rest Web services. To try out, use the following
+http://localhost:9090/rest/persons
+
+With header
+Accept - application/json
