@@ -41,19 +41,6 @@ public class InMemoryDBAppConfiguration {
         return dataSource;
     }
 
-//    @Bean (name = "sessionFactory")
-//    public LocalSessionFactoryBean getSessionFactory() {
-//        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-//        sessionFactory.setDataSource(getDataSource());
-//        sessionFactory.setPackagesToScan(new String[] { "com.tr.*" });
-//
-//        Properties properties = new Properties();
-//        properties.setProperty("hibernate.dialect", environment.getProperty("spring.datasource.dialect"));
-//        sessionFactory.setHibernateProperties(properties);
-//
-//        return sessionFactory;
-//    }
-
     @Bean
     public EntityManagerFactory entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
@@ -73,6 +60,9 @@ public class InMemoryDBAppConfiguration {
         return factory.getObject();
     }
 
+    /**
+     * Required by Spring Data.
+     */
     @Bean
     public PlatformTransactionManager transactionManager() {
 
@@ -81,7 +71,10 @@ public class InMemoryDBAppConfiguration {
         return txManager;
     }
 
-    @Bean
+    /**
+     * Liquibase
+     */
+    @Bean (name = "liquibase")
     public SpringLiquibase instantiateLiquibaseBean() {
         SpringLiquibase springLiquibase = new SpringLiquibase();
         springLiquibase.setDataSource(getDataSource());
