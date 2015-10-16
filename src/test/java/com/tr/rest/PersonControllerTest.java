@@ -3,6 +3,7 @@ package com.tr.rest;
 import com.tr.mediaType.Persons;
 import com.tr.spring.RestTestConfig;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -17,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringApplicationConfiguration(classes = RestTestConfig.class)
 @WebIntegrationTest ("server.port:9000")
 @TestPropertySource(value = "classpath:/test-application.properties")
+@Ignore
 public class PersonControllerTest {
 
     private RestTemplate restTemplate = new TestRestTemplate();

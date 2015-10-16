@@ -20,7 +20,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@ComponentScan(basePackages = "com.tr.*")
+@ComponentScan(basePackages = {"com.tr.controller", "com.tr.entity", "com.tr.mediaType", "com.tr.rest"})
 @PropertySource("classpath:/application.properties")
 @EnableJpaRepositories(basePackages = "com.tr.repository")
 public class InMemoryDBAppConfiguration {
