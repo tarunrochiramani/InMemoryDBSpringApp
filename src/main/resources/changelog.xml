@@ -6,12 +6,13 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <!--<changeSet id="1" author="Sample">-->
-        <!--<createTable tableName="person">-->
-            <!--<column name="firstName" type="VARCHAR2" />-->
-            <!--<column name="lastName" type="VARCHAR2" />-->
-        <!--</createTable>-->
-    <!--</changeSet>-->
+    <changeSet id="1" author="Sample">
+        <createTable tableName="person">
+            <column name="id" autoIncrement="true" type="BIGINT" />
+            <column name="firstName" type="VARCHAR2" />
+            <column name="lastName" type="VARCHAR2" />
+        </createTable>
+    </changeSet>
 
     <changeSet id="1" author="Insert_Person">
         <insert tableName="person">
@@ -19,6 +20,5 @@
             <column name="lastName" value="Rochiramani" type="VARCHAR2" />
         </insert>
     </changeSet>
-
 
 </databaseChangeLog>

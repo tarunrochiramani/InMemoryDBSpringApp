@@ -41,14 +41,14 @@ public class InMemoryDBAppConfiguration {
         return dataSource;
     }
 
-    @Bean
-    public EntityManagerFactory entityManagerFactory() {
+    @Bean (name = "entityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setDataSource(getDataSource());
         factory.setPackagesToScan("com.tr.entity");
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setGenerateDdl(true);
+//        vendorAdapter.setGenerateDdl(true);
         factory.setJpaVendorAdapter(vendorAdapter);
 
         Properties jpaProperties = new Properties();
@@ -57,17 +57,17 @@ public class InMemoryDBAppConfiguration {
 
         factory.afterPropertiesSet();
 
-        return factory.getObject();
+        return factory;
     }
 
     /**
      * Required by Spring Data.
      */
-    @Bean
+    @Bean (name = "transactionManager")
     public PlatformTransactionManager transactionManager() {
 
         JpaTransactionManager txManager = new JpaTransactionManager();
-        txManager.setEntityManagerFactory(entityManagerFactory());
+        txManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return txManager;
     }
 
